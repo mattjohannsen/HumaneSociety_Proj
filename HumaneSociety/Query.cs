@@ -162,8 +162,9 @@ namespace HumaneSociety
 
 
         //// TODO Items: ////
-        
+
         // TODO: Allow any of the CRUD operations to occur here
+        //This is a method we changed - For Andrew's reference.
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
             if (crudOperation == "create")
@@ -296,6 +297,7 @@ namespace HumaneSociety
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
+            //This is a method we changed - For Andrew's reference.
             db.Animals.InsertOnSubmit(animal);
             try
             {
