@@ -169,8 +169,32 @@ namespace HumaneSociety
             if (crudOperation == "create")
             {
                 //Add Lambda expression here to carry out Crud Operation.  Put this info into database.
-                //AddEmployee();
-                //RunUserMenus();
+                // Create a new Order object.
+                //Employee employeeToAdd = employee;
+                //{
+                //    employeeToAdd.FirstName = employee.FirstName;
+                //    employeeToAdd.LastName = employee.LastName;
+                //    employeeToAdd.UserName = employee.UserName;
+                //    employeeToAdd.Password = employee.Password;
+                //    employeeToAdd.EmployeeNumber = employee.EmployeeNumber;
+                //    employeeToAdd.Email = employee.Email;
+                //    // …
+                //};
+                // Add the new object to the Employee collection.
+                // Submit the change to the database.
+                db.Employees.InsertOnSubmit(employee);
+                try
+                {
+                    db.SubmitChanges();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    // Make some adjustments.
+                    // ...
+                    // Try again.
+                    db.SubmitChanges();
+                }
             }
             else if (crudOperation == "delete")
             {
