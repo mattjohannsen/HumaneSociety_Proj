@@ -166,7 +166,31 @@ namespace HumaneSociety
         // TODO: Allow any of the CRUD operations to occur here
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
-            throw new NotImplementedException();
+            if (crudOperation == "create")
+            {
+                //Add Lambda expression here to carry out Crud Operation.  Put this info into database.
+                //AddEmployee();
+                //RunUserMenus();
+            }
+            else if (crudOperation == "delete")
+            {
+                //RemoveEmployee();
+                //RunUserMenus();
+            }
+            else if (crudOperation == "read")
+            {
+                //ReadEmployee();
+                //RunUserMenus();
+            }
+            else if (crudOperation == "update")
+            {
+                //UpdateEmployee();
+                //RunUserMenus();
+            }
+            else
+            {
+                throw new NotImplementedException();
+            }
         }
 
         // TODO: Animal CRUD Operations

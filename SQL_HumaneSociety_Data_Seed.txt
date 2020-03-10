@@ -84,23 +84,3 @@ INSERT INTO Clients (FirstName, LastName, UserName, Password, AddressId, Email)
 VALUES ('Halle', 'Berry', 'hallieb', 'hallespass', 1, 'thehalle@gmail.com')
 INSERT INTO Clients (FirstName, LastName, UserName, Password, AddressId, Email)
 VALUES ('Keanu', 'Reeves', 'billnotted', 'keanuspass', 1, 'johnwick@gmail.com')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
