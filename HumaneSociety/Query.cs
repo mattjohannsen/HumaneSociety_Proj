@@ -172,12 +172,12 @@ namespace HumaneSociety
                 // Create a new Order object.
                 //Employee employeeToAdd = employee;
                 //{
-                //    employeeToAdd.FirstName = employee.FirstName;
-                //    employeeToAdd.LastName = employee.LastName;
-                //    employeeToAdd.UserName = employee.UserName;
-                //    employeeToAdd.Password = employee.Password;
-                //    employeeToAdd.EmployeeNumber = employee.EmployeeNumber;
-                //    employeeToAdd.Email = employee.Email;
+                //employeeToAdd.FirstName = employee.FirstName;
+                //employeeToAdd.LastName = employee.LastName;
+                //employeeToAdd.UserName = employee.UserName;
+                //employeeToAdd.Password = employee.Password;
+                //employeeToAdd.EmployeeNumber = employee.EmployeeNumber;
+                //employeeToAdd.Email = employee.Email;
                 //    // …
                 //};
                 // Add the new object to the Employee collection.
@@ -225,8 +225,54 @@ namespace HumaneSociety
             }
             else if (crudOperation == "update")
             {
-                //UpdateEmployee();
-                //RunUserMenus();
+                //Employee employeeToUpdate = employee;
+                    //employeeToUpdate = dbContext.Employees.First();
+                    //employeeToUpdate = employee.Where(w => w.Contains("th"));
+
+                    //employeeToUpdate = (from e in dbContext.Employees where employee.EmployeeId = e.EmployeeId select e).ToList();
+                //Context.employeeToUpdate
+                //.Where(p => employee.EmployeeId == employeeToUpdate.EmployeeId)
+                //.ToList()
+                //.ForEach(x => x.is_default = false);
+                
+                // Query the database for the row to be updated.
+                var query =
+                    from employeeToUpdate in db.Employees
+                    where employeeToUpdate.EmployeeId == employee.EmployeeId
+                    select employeeToUpdate;
+
+                // Execute the query, and change the column values
+                // you want to change.
+                foreach (Employee employeeToUpdate in query)
+                {
+
+                    employeeToUpdate.FirstName = employee.FirstName;
+                    employeeToUpdate.LastName = employee.LastName;
+                    employeeToUpdate.UserName = employee.UserName;
+                    employeeToUpdate.Password = employee.Password;
+                    employeeToUpdate.EmployeeNumber = employee.EmployeeNumber;
+                    employeeToUpdate.Email = employee.Email;
+                    // Insert any additional changes to column values.
+                }
+
+                // Submit the changes to the database.
+                try
+                {
+                    db.SubmitChanges();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    // Provide for exceptions.
+                }
+
+                //employeeToUpdate.FirstName = employee.FirstName;
+                //employeeToUpdate.LastName = employee.LastName;
+                //employeeToUpdate.UserName = employee.UserName;
+                //employeeToUpdate.Password = employee.Password;
+                //employeeToUpdate.EmployeeNumber = employee.EmployeeNumber;
+                //employeeToUpdate.Email = employee.Email;
+                //dbContext.SaveChanges();
             }
             else
             {
