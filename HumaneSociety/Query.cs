@@ -240,15 +240,15 @@ namespace HumaneSociety
             else if (crudOperation == "update")
             {
                 //Employee employeeToUpdate = employee;
-                    //employeeToUpdate = dbContext.Employees.First();
-                    //employeeToUpdate = employee.Where(w => w.Contains("th"));
+                //employeeToUpdate = dbContext.Employees.First();
+                //employeeToUpdate = employee.Where(w => w.Contains("th")
+                //employeeToUpdate = (from e in _Context.Employees where employee.EmployeeId = e.EmployeeId select e).ToList(););
 
-                    //employeeToUpdate = (from e in dbContext.Employees where employee.EmployeeId = e.EmployeeId select e).ToList();
                 //Context.employeeToUpdate
                 //.Where(p => employee.EmployeeId == employeeToUpdate.EmployeeId)
                 //.ToList()
                 //.ForEach(x => x.is_default = false);
-                
+
                 // Query the database for the row to be updated.
                 var query =
                     from employeeToUpdate in db.Employees
@@ -315,7 +315,29 @@ namespace HumaneSociety
 
         internal static Animal GetAnimalByID(int id)
         {
-            throw new NotImplementedException();
+            //This is a method we changed - For Andrew's reference.
+            var query =
+                from animalToGet in db.Animals
+                where animalToGet.AnimalId == id
+                select animalToGet;
+            Animal animalToReturn = new Animal();
+            foreach (Animal animalToGet in query)
+            {
+                animalToReturn.AnimalId = animalToGet.AnimalId;
+                animalToReturn.Name = animalToGet.Name;
+                animalToReturn.Weight = animalToGet.Weight;
+                animalToReturn.Age = animalToGet.Age;
+                animalToReturn.Demeanor = animalToGet.Demeanor;
+                animalToReturn.KidFriendly = animalToGet.KidFriendly;
+                animalToReturn.PetFriendly = animalToGet.PetFriendly;
+                animalToReturn.Gender = animalToGet.Gender;
+                animalToReturn.AdoptionStatus = animalToGet.AdoptionStatus;
+                animalToReturn.CategoryId = animalToGet.CategoryId;
+                animalToReturn.DietPlanId = animalToGet.DietPlanId;
+                animalToReturn.EmployeeId = animalToGet.EmployeeId;
+                // Insert any additional changes to column values.
+            }
+            return animalToReturn;
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
@@ -325,7 +347,25 @@ namespace HumaneSociety
 
         internal static void RemoveAnimal(Animal animal)
         {
-            throw new NotImplementedException();
+            // Query the database for the rows to be deleted.
+            var animalsToDelete =
+                from animals in db.Animals
+                where animals.AnimalId == animal.AnimalId
+                select animals;
+
+            foreach (var item in animalsToDelete)
+            {
+                db.Animals.DeleteOnSubmit(item);
+            }
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                // Provide for exceptions.
+            }
         }
         
         // TODO: Animal Multi-Trait Search
