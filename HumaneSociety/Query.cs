@@ -198,8 +198,25 @@ namespace HumaneSociety
             }
             else if (crudOperation == "delete")
             {
-                //RemoveEmployee();
-                //RunUserMenus();
+                // Query the database for the rows to be deleted.
+                var employeesToDelete =
+                    from employees in db.Employees
+                    where employees.EmployeeId == 11000
+                    select employees;
+
+                foreach (var item in employeesToDelete)
+                {
+                    db.Employees.DeleteOnSubmit(item);
+                }
+                try
+                {
+                    db.SubmitChanges();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    // Provide for exceptions.
+                }
             }
             else if (crudOperation == "read")
             {
