@@ -239,37 +239,19 @@ namespace HumaneSociety
             }
             else if (crudOperation == "update")
             {
-                //Employee employeeToUpdate = employee;
-                //employeeToUpdate = dbContext.Employees.First();
-                //employeeToUpdate = employee.Where(w => w.Contains("th")
-                //employeeToUpdate = (from e in _Context.Employees where employee.EmployeeId = e.EmployeeId select e).ToList(););
-
-                //Context.employeeToUpdate
-                //.Where(p => employee.EmployeeId == employeeToUpdate.EmployeeId)
-                //.ToList()
-                //.ForEach(x => x.is_default = false);
-
-                // Query the database for the row to be updated.
                 var query =
                     from employeeToUpdate in db.Employees
                     where employeeToUpdate.EmployeeId == employee.EmployeeId
                     select employeeToUpdate;
-
-                // Execute the query, and change the column values
-                // you want to change.
                 foreach (Employee employeeToUpdate in query)
                 {
-
                     employeeToUpdate.FirstName = employee.FirstName;
                     employeeToUpdate.LastName = employee.LastName;
                     employeeToUpdate.UserName = employee.UserName;
                     employeeToUpdate.Password = employee.Password;
                     employeeToUpdate.EmployeeNumber = employee.EmployeeNumber;
                     employeeToUpdate.Email = employee.Email;
-                    // Insert any additional changes to column values.
                 }
-
-                // Submit the changes to the database.
                 try
                 {
                     db.SubmitChanges();
@@ -277,16 +259,7 @@ namespace HumaneSociety
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
-                    // Provide for exceptions.
                 }
-
-                //employeeToUpdate.FirstName = employee.FirstName;
-                //employeeToUpdate.LastName = employee.LastName;
-                //employeeToUpdate.UserName = employee.UserName;
-                //employeeToUpdate.Password = employee.Password;
-                //employeeToUpdate.EmployeeNumber = employee.EmployeeNumber;
-                //employeeToUpdate.Email = employee.Email;
-                //dbContext.SaveChanges();
             }
             else
             {
@@ -341,8 +314,40 @@ namespace HumaneSociety
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
-        {            
-            throw new NotImplementedException();
+        {
+            //This is a method we changed - For Andrew's reference.
+            if (updates[1] == "1")
+            {
+
+            }
+            else if (updates[2] == "2")
+            {
+
+            }
+            else if (updates[3] == "3")
+            {
+
+            }
+            else if (updates[4] == "4")
+            {
+
+            }
+            else if (updates[5] == "5")
+            {
+
+            }
+            else if (updates[6] == "6")
+            {
+
+            }
+            else if (updates[7] == "7")
+            {
+
+            }
+            else
+            {
+                UserInterface.DisplayUserOptions("Input not recognized please try again or type exit");
+            }
         }
 
         internal static void RemoveAnimal(Animal animal)
