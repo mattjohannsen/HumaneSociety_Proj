@@ -318,31 +318,59 @@ namespace HumaneSociety
             //This is a method we changed - For Andrew's reference.
             if (updates[1] == "1")
             {
-
+                var animalsToUpdate = db.Animals.Where(a => a.AnimalId == animalId);
+                foreach (Animal item in animalsToUpdate)
+                {
+                    item.CategoryId = Int32.Parse(updates[1]);
+                }
             }
             else if (updates[2] == "2")
             {
-
+                var animalsToUpdate = db.Animals.Where(a => a.AnimalId == animalId);
+                foreach (Animal item in animalsToUpdate)
+                {
+                    item.Name = updates[2];
+                }
             }
             else if (updates[3] == "3")
             {
-
+                var animalsToUpdate = db.Animals.Where(a => a.AnimalId == animalId);
+                foreach (Animal item in animalsToUpdate)
+                {
+                    item.Age = Int32.Parse(updates[3]);
+                }
             }
             else if (updates[4] == "4")
             {
-
+                var animalsToUpdate = db.Animals.Where(a => a.AnimalId == animalId);
+                foreach (Animal item in animalsToUpdate)
+                {
+                    item.Demeanor = updates[4];
+                }
             }
             else if (updates[5] == "5")
             {
-
+                var animalsToUpdate = db.Animals.Where(a => a.AnimalId == animalId);
+                foreach (Animal item in animalsToUpdate)
+                {
+                    item.KidFriendly = Convert.ToBoolean(updates[5]);
+                }
             }
             else if (updates[6] == "6")
             {
-
+                var animalsToUpdate = db.Animals.Where(a => a.AnimalId == animalId);
+                foreach (Animal item in animalsToUpdate)
+                {
+                    item.PetFriendly = Convert.ToBoolean(updates[6]);
+                }
             }
             else if (updates[7] == "7")
             {
-
+                var animalsToUpdate = db.Animals.Where(a => a.AnimalId == animalId);
+                foreach (Animal item in animalsToUpdate)
+                {
+                    item.Weight = Int32.Parse(updates[7]);
+                }
             }
             else
             {
