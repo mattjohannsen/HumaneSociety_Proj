@@ -220,8 +220,21 @@ namespace HumaneSociety
             }
             else if (crudOperation == "read")
             {
-                //ReadEmployee();
-                //RunUserMenus();
+                var query =
+                    from employeeToRead in db.Employees
+                    where employeeToRead.EmployeeNumber == employee.EmployeeNumber
+                    select employeeToRead;
+                foreach (Employee employeeToRead in query)
+                {
+                    employee.EmployeeId = employeeToRead.EmployeeId;
+                    employee.FirstName = employeeToRead.FirstName;
+                    employee.LastName = employeeToRead.LastName;
+                    employee.UserName = employeeToRead.UserName;
+                    employee.Password = employeeToRead.Password;
+                    employee.EmployeeNumber = employeeToRead.EmployeeNumber;
+                    employee.Email = employeeToRead.Email;
+                    // Insert any additional changes to column values.
+                }
             }
             else if (crudOperation == "update")
             {
