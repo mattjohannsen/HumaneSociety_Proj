@@ -1,0 +1,106 @@
+INSERT INTO Categories (Name) 
+VALUES ('Dog')
+INSERT INTO Categories (Name) 
+VALUES ('Cat')
+INSERT INTO Categories (Name) 
+VALUES ('Reptile')
+INSERT INTO Categories (Name) 
+VALUES ('Fish')
+INSERT INTO Categories (Name) 
+VALUES ('Bird')
+
+INSERT INTO DietPlans (Name, FoodType, FoodAmountInCups)
+VALUES ('Puppy Diet', 'Dry Food', 1)
+INSERT INTO DietPlans (Name, FoodType, FoodAmountInCups)
+VALUES ('Dog Diet', 'Dry Food', 3)
+INSERT INTO DietPlans (Name, FoodType, FoodAmountInCups)
+VALUES ('Vegetarian', 'Vegetables', 1)
+INSERT INTO DietPlans (Name, FoodType, FoodAmountInCups)
+VALUES ('Kitten Diet', 'Soft Food', 1)
+INSERT INTO DietPlans (Name, FoodType, FoodAmountInCups)
+VALUES ('Cat Diet', 'Soft Food', 3)
+
+INSERT INTO Employees (FirstName, LastName, UserName, Password, EmployeeNumber, Email)
+VALUES ('Kelvin', 'Omoregie', 'kingkong', 'kelvinspass', 1001, 'kelvino@gmail.com')
+INSERT INTO Employees (FirstName, LastName, UserName, Password, EmployeeNumber, Email)
+VALUES ('Andrew', 'Curzon', 'airforce1', 'andrewspass', 1002, 'andrewcurzon@gmail.com')
+INSERT INTO Employees (FirstName, LastName, UserName, Password, EmployeeNumber, Email)
+VALUES ('Matt', 'Johannsen', 'majohann', 'mattspass', 1003, 'majohann@hotmail.com')
+INSERT INTO Employees (FirstName, LastName, UserName, Password, EmployeeNumber, Email)
+VALUES ('Bill', 'Smith', 'billyboy', 'billspass', 1004, 'bill@gmail.com')
+INSERT INTO Employees (FirstName, LastName, UserName, Password, EmployeeNumber, Email)
+VALUES ('Danny', 'Jackson', 'dannyj', 'dannyspass', 1005, 'dannyjack@gmail.com')
+
+INSERT INTO Animals (Name, Weight, Age, Demeanor, KidFriendly, PetFriendly, Gender, AdoptionStatus, CategoryId, DietPlanId, EmployeeId)
+VALUES ('Whiskey', 50, 2, 'mean', 0, 0, 'male', 'available', 1, 2, 1)
+INSERT INTO Animals (Name, Weight, Age, Demeanor, KidFriendly, PetFriendly, Gender, AdoptionStatus, CategoryId, DietPlanId, EmployeeId)
+VALUES ('Tango', 30, 1, 'nice', 1, 1, 'female', 'available', 2, 5, 2)
+INSERT INTO Animals (Name, Weight, Age, Demeanor, KidFriendly, PetFriendly, Gender, AdoptionStatus, CategoryId, DietPlanId, EmployeeId)
+VALUES ('Foxy', 20, 3, 'nice', 1, 1, 'female', 'available', 3, 3, 3)
+INSERT INTO Animals (Name, Weight, Age, Demeanor, KidFriendly, PetFriendly, Gender, AdoptionStatus, CategoryId, DietPlanId, EmployeeId)
+VALUES ('Bingo', 2, 15, 'friendly', 1, 1, 'male', 'available', 5, 3, 4)
+INSERT INTO Animals (Name, Weight, Age, Demeanor, KidFriendly, PetFriendly, Gender, AdoptionStatus, CategoryId, DietPlanId, EmployeeId)
+VALUES ('Charlie', 3, 1, 'friendly', 1, 0, 'female', 'available', 4, 3, 5)
+
+INSERT INTO Rooms (RoomNumber, AnimalId)
+VALUES (1, 1)
+INSERT INTO Rooms (RoomNumber, AnimalId)
+VALUES (2, 1)
+INSERT INTO Rooms (RoomNumber, AnimalId)
+VALUES (3, 1)
+INSERT INTO Rooms (RoomNumber, AnimalId)
+VALUES (4, 1)
+INSERT INTO Rooms (RoomNumber, AnimalId)
+VALUES (5, 2)
+INSERT INTO Rooms (RoomNumber, AnimalId)
+VALUES (6, 2)
+INSERT INTO Rooms (RoomNumber, AnimalId)
+VALUES (7, 2)
+INSERT INTO Rooms (RoomNumber, AnimalId)
+VALUES (8, 3)
+INSERT INTO Rooms (RoomNumber, AnimalId)
+VALUES (9, 4)
+INSERT INTO Rooms (RoomNumber, AnimalId)
+VALUES (10, 5)
+
+INSERT INTO Addresses (AddressLine1, City, USStateId, Zipcode)
+VALUES ('1003 Waterfall Village', 'Milwaukee', 49, 53222)
+INSERT INTO Addresses (AddressLine1, City, USStateId, Zipcode)
+VALUES ('2305 Bentley Road', 'Milwaukee', 49, 53222)
+INSERT INTO Addresses (AddressLine1, City, USStateId, Zipcode)
+VALUES ('12135 Walden Woods Road', 'Milwaukee', 49, 53222)
+INSERT INTO Addresses (AddressLine1, City, USStateId, Zipcode)
+VALUES ('1530 Springside Drive', 'Milwaukee', 49, 53222)
+INSERT INTO Addresses (AddressLine1, City, USStateId, Zipcode)
+VALUES ('5344 Biveroy Way', 'Milwaukee', 49, 53222)
+
+INSERT INTO Clients (FirstName, LastName, UserName, Password, AddressId, Email)
+VALUES ('Jane', 'Eyre', 'janeseye', 'janespass', 1, 'janeeyre@gmail.com')
+INSERT INTO Clients (FirstName, LastName, UserName, Password, AddressId, Email)
+VALUES ('Jill', 'Scott', 'jillian', 'jillspass', 1, 'jillscott@gmail.com')
+INSERT INTO Clients (FirstName, LastName, UserName, Password, AddressId, Email)
+VALUES ('Rosa', 'Parks', 'rosie', 'rosaspass', 1, 'rosaparks@gmail.com')
+INSERT INTO Clients (FirstName, LastName, UserName, Password, AddressId, Email)
+VALUES ('Halle', 'Berry', 'hallieb', 'hallespass', 1, 'thehalle@gmail.com')
+INSERT INTO Clients (FirstName, LastName, UserName, Password, AddressId, Email)
+VALUES ('Keanu', 'Reeves', 'billnotted', 'keanuspass', 1, 'johnwick@gmail.com')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
