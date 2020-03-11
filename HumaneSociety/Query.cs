@@ -298,13 +298,9 @@ namespace HumaneSociety
         
         internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates)
         {
-            IQueryable<Animal> theAnimals =
-                   from animals in db.Animals
-                   where animals.CategoryId == Convert.ToInt32(updates[1]) && animals.Name == updates[2]
-                   && animals.Age == Convert.ToInt32(updates[3]) && animals.Demeanor == updates[4]
-                   && animals.KidFriendly == Convert.ToBoolean(updates[5]) && animals.PetFriendly == Convert.ToBoolean(updates[6])
-                   && animals.Weight == Convert.ToInt32(updates[7])
-                   select animals;
+            IQueryable<Animal> theAnimals = db.Animals.Where(a => a.CategoryId == Convert.ToInt32(updates[1]) && a.Name == updates[2]
+            && a.Age == Convert.ToInt32(updates[3]) && a.Demeanor == updates[4] && a.KidFriendly == Convert.ToBoolean(updates[5]) &&
+            a.PetFriendly == Convert.ToBoolean(updates[6]) && a.Weight == Convert.ToInt32(updates[7]));
 
             return theAnimals;
         }         
@@ -332,10 +328,10 @@ namespace HumaneSociety
             client = db.Clients.Where(a => a == client).FirstOrDefault();
             animal = db.Animals.Where(a => a == animal).FirstOrDefault();
             Adoption adoption = db.Adoptions.Where(a => a.ClientId == client.ClientId && a.AnimalId == animal.AnimalId).FirstOrDefault();
-
             animal.AdoptionStatus = "Adopted by: " + client.FirstName + " " + client.LastName;
             adoption.ApprovalStatus = "approved";
             adoption.PaymentCollected = true;
+            
             try
             {
                 db.SubmitChanges();
@@ -365,6 +361,7 @@ namespace HumaneSociety
                 adoption.ApprovalStatus = "pending";
                 adoption.PaymentCollected = false;
             }
+            
             try
             {
                 db.SubmitChanges();
@@ -380,6 +377,7 @@ namespace HumaneSociety
         {
             Adoption adoption = db.Adoptions.Where(a => a.AnimalId == animalId && a.ClientId == clientId).FirstOrDefault();
             db.Adoptions.DeleteOnSubmit(adoption);
+            
             try
             {
                 db.SubmitChanges();
@@ -402,6 +400,7 @@ namespace HumaneSociety
             Shot shot = db.Shots.Where(a => a.Name == shotName).FirstOrDefault();
             AnimalShot animalShot = db.AnimalShots.Where(a => a.AnimalId == animal.AnimalId && a.ShotId == shot.ShotId).FirstOrDefault();
             animalShot.DateReceived = DateTime.Now;
+            
             try
             {
                 db.SubmitChanges();
