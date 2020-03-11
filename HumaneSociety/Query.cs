@@ -134,37 +134,30 @@ namespace HumaneSociety
 
         internal static Employee RetrieveEmployeeUser(string email, int employeeNumber)
         {
-            Employee employeeFromDb = db.Employees.Where(e => e.Email == email && e.EmployeeNumber == employeeNumber).FirstOrDefault();
+            Employee employee = db.Employees.Where(e => e.Email == email && e.EmployeeNumber == employeeNumber).FirstOrDefault();
 
-            if (employeeFromDb == null)
+            if (employee == null)
             {
                 throw new NullReferenceException();
             }
             else
             {
-                return employeeFromDb;
+                return employee;
             }
         }
 
         internal static Employee EmployeeLogin(string userName, string password)
         {
-            Employee employeeFromDb = db.Employees.Where(e => e.UserName == userName && e.Password == password).FirstOrDefault();
-
-            return employeeFromDb;
+            Employee employee = db.Employees.Where(e => e.UserName == userName && e.Password == password).FirstOrDefault();
+            return employee;
         }
 
         internal static bool CheckEmployeeUserNameExist(string userName)
         {
-            Employee employeeWithUserName = db.Employees.Where(e => e.UserName == userName).FirstOrDefault();
-
-            return employeeWithUserName != null;
+            Employee employee = db.Employees.Where(e => e.UserName == userName).FirstOrDefault();
+            return employee != null;
         }
 
-
-        //// TODO Items: ////
-
-        // TODO: Allow any of the CRUD operations to occur here
-        //This is a method we changed - For Andrew's reference.
         internal static void RunEmployeeQueries(Employee employee, string crudOperation)
         {
             if (crudOperation == "create")
@@ -182,16 +175,10 @@ namespace HumaneSociety
             }
             else if (crudOperation == "delete")
             {
-                // Query the database for the rows to be deleted.
-                var employeesToDelete =
-                    from employees in db.Employees
-                    where employees.EmployeeId == employee.EmployeeId
-                    select employees;
 
-                foreach (var item in employeesToDelete)
-                {
-                    db.Employees.DeleteOnSubmit(item);
-                }
+                Employee employeeFromDb = db.Employees.Where(a => a.EmployeeId == employee.EmployeeId).FirstOrDefault();
+                db.Employees.DeleteOnSubmit(employeeFromDb);
+
                 try
                 {
                     db.SubmitChanges();
@@ -204,30 +191,24 @@ namespace HumaneSociety
             }
             else if (crudOperation == "read")
             {
-                employee = db.Employees.Where(a => a == employee).FirstOrDefault();
-                Console.WriteLine(employee.FirstName + "\n" +
-                    employee.LastName + "\n" +
-                    employee.UserName + "\n" +
-                    employee.Password + "\n" +
-                    employee.EmployeeNumber + "\n" + 
-                    employee.Email);
+                Employee employeeFromDb = db.Employees.Where(a => a == employee).FirstOrDefault();
+                Console.WriteLine(employeeFromDb.FirstName + "\n" +
+                    employeeFromDb.LastName + "\n" +
+                    employeeFromDb.UserName + "\n" +
+                    employeeFromDb.Password + "\n" +
+                    employeeFromDb.EmployeeNumber + "\n" +
+                    employeeFromDb.Email);
             }
             else if (crudOperation == "update")
             {
-                var query =
-                    from employees in db.Employees
-                    where employees.EmployeeId == employee.EmployeeId
-                    select employees;
-
-                foreach (Employee employees in query)
-                {
-                    employees.FirstName = employee.FirstName;
-                    employees.LastName = employee.LastName;
-                    employees.UserName = employee.UserName;
-                    employees.Password = employee.Password;
-                    employees.EmployeeNumber = employee.EmployeeNumber;
-                    employees.Email = employee.Email;
-                }
+                Employee employeeFromDb = db.Employees.Where(a => a.EmployeeId == employee.EmployeeId).FirstOrDefault();
+                employeeFromDb.FirstName = employee.FirstName;
+                employeeFromDb.LastName = employee.LastName;
+                employeeFromDb.UserName = employee.UserName;
+                employeeFromDb.Password = employee.Password;
+                employeeFromDb.EmployeeNumber = employee.EmployeeNumber;
+                employeeFromDb.Email = employee.Email;
+                
                 try
                 {
                     db.SubmitChanges();
@@ -239,7 +220,6 @@ namespace HumaneSociety
             }
         }
 
-        // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
             db.Animals.InsertOnSubmit(animal);
@@ -285,6 +265,7 @@ namespace HumaneSociety
         {
             animal = db.Animals.Where(a => a == animal).FirstOrDefault();
             db.Animals.DeleteOnSubmit(animal);
+            
             try
             {
                 db.SubmitChanges();
