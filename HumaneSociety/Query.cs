@@ -207,22 +207,13 @@ namespace HumaneSociety
             }
             else if (crudOperation == "read")
             {
-                var query =
-                    from employees in db.Employees
-                    where employees.EmployeeNumber == employee.EmployeeNumber
-                    select employees;
-
-                foreach (Employee employees in query)
-                {
-                    employee.EmployeeId = employees.EmployeeId;
-                    employee.FirstName = employees.FirstName;
-                    employee.LastName = employees.LastName;
-                    employee.UserName = employees.UserName;
-                    employee.Password = employees.Password;
-                    employee.EmployeeNumber = employees.EmployeeNumber;
-                    employee.Email = employees.Email;
-                    // Insert any additional changes to column values.
-                }
+                employee = db.Employees.Where(a => a == employee).FirstOrDefault();
+                Console.WriteLine(employee.FirstName + "\n" +
+                    employee.LastName + "\n" +
+                    employee.UserName + "\n" +
+                    employee.Password + "\n" +
+                    employee.EmployeeNumber + "\n" + 
+                    employee.Email);
             }
             else if (crudOperation == "update")
             {
