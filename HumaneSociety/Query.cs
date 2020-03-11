@@ -276,120 +276,26 @@ namespace HumaneSociety
 
         internal static Animal GetAnimalByID(int id)
         {
-            //This is a method we changed - For Andrew's reference.
-            var query =
-                from animals in db.Animals
-                where animals.AnimalId == id
-                select animals;
-
-            Animal animalToReturn = new Animal();
-
-            foreach (Animal animals in query)
-            {
-                animalToReturn.AnimalId = animals.AnimalId;
-                animalToReturn.Name = animals.Name;
-                animalToReturn.Weight = animals.Weight;
-                animalToReturn.Age = animals.Age;
-                animalToReturn.Demeanor = animals.Demeanor;
-                animalToReturn.KidFriendly = animals.KidFriendly;
-                animalToReturn.PetFriendly = animals.PetFriendly;
-                animalToReturn.Gender = animals.Gender;
-                animalToReturn.AdoptionStatus = animals.AdoptionStatus;
-                animalToReturn.CategoryId = animals.CategoryId;
-                animalToReturn.DietPlanId = animals.DietPlanId;
-                animalToReturn.EmployeeId = animals.EmployeeId;
-                // Insert any additional changes to column values.
-            }
-
-            return animalToReturn;
+            Animal animal = db.Animals.Where(a => a.AnimalId == id).FirstOrDefault();
+            return animal;
         }
 
         internal static void UpdateAnimal(int animalId, Dictionary<int, string> updates)
         {
-            //This is a method we changed - For Andrew's reference.
-            if (updates[1] == "1")
-            {
-                var animalsToUpdate = db.Animals.Where(a => a.AnimalId == animalId);
-                foreach (Animal item in animalsToUpdate)
-                {
-                    item.CategoryId = Int32.Parse(updates[1]);
-                }
-            }
-            else if (updates[2] == "2")
-            {
-                var animalsToUpdate = db.Animals.Where(a => a.AnimalId == animalId);
-                foreach (Animal item in animalsToUpdate)
-                {
-                    item.Name = updates[2];
-                }
-            }
-            else if (updates[3] == "3")
-            {
-                var animalsToUpdate = db.Animals.Where(a => a.AnimalId == animalId);
-                foreach (Animal item in animalsToUpdate)
-                {
-                    item.Age = Int32.Parse(updates[3]);
-                }
-            }
-            else if (updates[4] == "4")
-            {
-                var animalsToUpdate = db.Animals.Where(a => a.AnimalId == animalId);
-                foreach (Animal item in animalsToUpdate)
-                {
-                    item.Demeanor = updates[4];
-                }
-            }
-            else if (updates[5] == "5")
-            {
-                var animalsToUpdate = db.Animals.Where(a => a.AnimalId == animalId);
-                foreach (Animal item in animalsToUpdate)
-                {
-                    item.KidFriendly = Convert.ToBoolean(updates[5]);
-                }
-            }
-            else if (updates[6] == "6")
-            {
-                var animalsToUpdate = db.Animals.Where(a => a.AnimalId == animalId);
-                foreach (Animal item in animalsToUpdate)
-                {
-                    item.PetFriendly = Convert.ToBoolean(updates[6]);
-                }
-            }
-            else if (updates[7] == "7")
-            {
-                var animalsToUpdate = db.Animals.Where(a => a.AnimalId == animalId);
-                foreach (Animal item in animalsToUpdate)
-                {
-                    item.Weight = Int32.Parse(updates[7]);
-                }
-            }
-            else
-            {
-                UserInterface.DisplayUserOptions("Input not recognized please try again or type exit");
-            }
+            Animal animal = db.Animals.Where(a => a.AnimalId == animalId).FirstOrDefault();
+            animal.CategoryId = Convert.ToInt32(updates[1]);
+            animal.Name = updates[2];
+            animal.Age = Convert.ToInt32(updates[3]);
+            animal.Demeanor = updates[4];
+            animal.KidFriendly = Convert.ToBoolean(updates[5]);
+            animal.PetFriendly = Convert.ToBoolean(updates[6]);
+            animal.Weight = Convert.ToInt32(updates[7]);
         }
 
         internal static void RemoveAnimal(Animal animal)
         {
-            // Query the database for the rows to be deleted.
-            var animalsToDelete =
-                from animals in db.Animals
-                where animals.AnimalId == animal.AnimalId
-                select animals;
-
-            foreach (var item in animalsToDelete)
-            {
-                db.Animals.DeleteOnSubmit(item);
-            }
-            try
-            {
-                db.SubmitChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                // Provide for exceptions.
-            }
+            animal = db.Animals.Where(a => a == animal).FirstOrDefault();
+            db.Animals.DeleteOnSubmit(animal);
         }
         
         // TODO: Animal Multi-Trait Search
