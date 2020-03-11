@@ -177,9 +177,6 @@ namespace HumaneSociety
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
-                    // Make some adjustments.
-                    // ...
-                    // Try again.
                     db.SubmitChanges();
                 }
             }
@@ -240,16 +237,11 @@ namespace HumaneSociety
                     Console.WriteLine(e);
                 }
             }
-            else
-            {
-                throw new NotImplementedException();
-            }
         }
 
         // TODO: Animal CRUD Operations
         internal static void AddAnimal(Animal animal)
         {
-            //This is a method we changed - For Andrew's reference.
             db.Animals.InsertOnSubmit(animal);
             try
             {
@@ -258,9 +250,6 @@ namespace HumaneSociety
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                // Make some adjustments.
-                // ...
-                // Try again.
                 db.SubmitChanges();
             }
         }
@@ -281,15 +270,32 @@ namespace HumaneSociety
             animal.KidFriendly = Convert.ToBoolean(updates[5]);
             animal.PetFriendly = Convert.ToBoolean(updates[6]);
             animal.Weight = Convert.ToInt32(updates[7]);
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                db.SubmitChanges();
+            }
         }
 
         internal static void RemoveAnimal(Animal animal)
         {
             animal = db.Animals.Where(a => a == animal).FirstOrDefault();
             db.Animals.DeleteOnSubmit(animal);
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                db.SubmitChanges();
+            }
         }
         
-        // TODO: Animal Multi-Trait Search
         internal static IQueryable<Animal> SearchForAnimalsByMultipleTraits(Dictionary<int, string> updates)
         {
             IQueryable<Animal> theAnimals =
@@ -301,9 +307,8 @@ namespace HumaneSociety
                    select animals;
 
             return theAnimals;
-        }
-         
-        // TODO: Misc Animal Things
+        }         
+
         internal static int GetCategoryId(string categoryName)
         {
             int CatId = Convert.ToInt32(db.Categories.Where(a => a.Name == categoryName).Select(a => a.CategoryId));
@@ -322,7 +327,6 @@ namespace HumaneSociety
             return dietPlanId;
         }
 
-        // TODO: Adoption CRUD Operations
         internal static void Adopt(Animal animal, Client client)
         {
             client = db.Clients.Where(a => a == client).FirstOrDefault();
@@ -332,6 +336,15 @@ namespace HumaneSociety
             animal.AdoptionStatus = "Adopted by: " + client.FirstName + " " + client.LastName;
             adoption.ApprovalStatus = "approved";
             adoption.PaymentCollected = true;
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                db.SubmitChanges();
+            }
         }
 
         internal static IQueryable<Adoption> GetPendingAdoptions()
@@ -352,23 +365,52 @@ namespace HumaneSociety
                 adoption.ApprovalStatus = "pending";
                 adoption.PaymentCollected = false;
             }
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                db.SubmitChanges();
+            }
         }
 
         internal static void RemoveAdoption(int animalId, int clientId)
         {
             Adoption adoption = db.Adoptions.Where(a => a.AnimalId == animalId && a.ClientId == clientId).FirstOrDefault();
             db.Adoptions.DeleteOnSubmit(adoption);
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                db.SubmitChanges();
+            }
         }
 
-        // TODO: Shots Stuff
         internal static IQueryable<AnimalShot> GetShots(Animal animal)
         {
-            throw new NotImplementedException();
+            IQueryable<AnimalShot> shots = db.AnimalShots.Where(a => a.Animal == animal);
+            return shots;
         }
 
         internal static void UpdateShot(string shotName, Animal animal)
         {
-            throw new NotImplementedException();
+            Shot shot = db.Shots.Where(a => a.Name == shotName).FirstOrDefault();
+            AnimalShot animalShot = db.AnimalShots.Where(a => a.AnimalId == animal.AnimalId && a.ShotId == shot.ShotId).FirstOrDefault();
+            animalShot.DateReceived = DateTime.Now;
+            try
+            {
+                db.SubmitChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                db.SubmitChanges();
+            }
         }
     }
 }
