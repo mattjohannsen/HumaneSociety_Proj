@@ -169,20 +169,6 @@ namespace HumaneSociety
         {
             if (crudOperation == "create")
             {
-                //Add Lambda expression here to carry out Crud Operation.  Put this info into database.
-                // Create a new Order object.
-                //Employee employeeToAdd = employee;
-                //{
-                //employeeToAdd.FirstName = employee.FirstName;
-                //employeeToAdd.LastName = employee.LastName;
-                //employeeToAdd.UserName = employee.UserName;
-                //employeeToAdd.Password = employee.Password;
-                //employeeToAdd.EmployeeNumber = employee.EmployeeNumber;
-                //employeeToAdd.Email = employee.Email;
-                //    // …
-                //};
-                // Add the new object to the Employee collection.
-                // Submit the change to the database.
                 db.Employees.InsertOnSubmit(employee);
                 try
                 {
@@ -202,7 +188,7 @@ namespace HumaneSociety
                 // Query the database for the rows to be deleted.
                 var employeesToDelete =
                     from employees in db.Employees
-                    where employees.EmployeeId == 11000
+                    where employees.EmployeeId == employee.EmployeeId
                     select employees;
 
                 foreach (var item in employeesToDelete)
@@ -222,35 +208,37 @@ namespace HumaneSociety
             else if (crudOperation == "read")
             {
                 var query =
-                    from employeeToRead in db.Employees
-                    where employeeToRead.EmployeeNumber == employee.EmployeeNumber
-                    select employeeToRead;
-                foreach (Employee employeeToRead in query)
+                    from employees in db.Employees
+                    where employees.EmployeeNumber == employee.EmployeeNumber
+                    select employees;
+
+                foreach (Employee employees in query)
                 {
-                    employee.EmployeeId = employeeToRead.EmployeeId;
-                    employee.FirstName = employeeToRead.FirstName;
-                    employee.LastName = employeeToRead.LastName;
-                    employee.UserName = employeeToRead.UserName;
-                    employee.Password = employeeToRead.Password;
-                    employee.EmployeeNumber = employeeToRead.EmployeeNumber;
-                    employee.Email = employeeToRead.Email;
+                    employee.EmployeeId = employees.EmployeeId;
+                    employee.FirstName = employees.FirstName;
+                    employee.LastName = employees.LastName;
+                    employee.UserName = employees.UserName;
+                    employee.Password = employees.Password;
+                    employee.EmployeeNumber = employees.EmployeeNumber;
+                    employee.Email = employees.Email;
                     // Insert any additional changes to column values.
                 }
             }
             else if (crudOperation == "update")
             {
                 var query =
-                    from employeeToUpdate in db.Employees
-                    where employeeToUpdate.EmployeeId == employee.EmployeeId
-                    select employeeToUpdate;
-                foreach (Employee employeeToUpdate in query)
+                    from employees in db.Employees
+                    where employees.EmployeeId == employee.EmployeeId
+                    select employees;
+
+                foreach (Employee employees in query)
                 {
-                    employeeToUpdate.FirstName = employee.FirstName;
-                    employeeToUpdate.LastName = employee.LastName;
-                    employeeToUpdate.UserName = employee.UserName;
-                    employeeToUpdate.Password = employee.Password;
-                    employeeToUpdate.EmployeeNumber = employee.EmployeeNumber;
-                    employeeToUpdate.Email = employee.Email;
+                    employees.FirstName = employee.FirstName;
+                    employees.LastName = employee.LastName;
+                    employees.UserName = employee.UserName;
+                    employees.Password = employee.Password;
+                    employees.EmployeeNumber = employee.EmployeeNumber;
+                    employees.Email = employee.Email;
                 }
                 try
                 {
@@ -290,26 +278,29 @@ namespace HumaneSociety
         {
             //This is a method we changed - For Andrew's reference.
             var query =
-                from animalToGet in db.Animals
-                where animalToGet.AnimalId == id
-                select animalToGet;
+                from animals in db.Animals
+                where animals.AnimalId == id
+                select animals;
+
             Animal animalToReturn = new Animal();
-            foreach (Animal animalToGet in query)
+
+            foreach (Animal animals in query)
             {
-                animalToReturn.AnimalId = animalToGet.AnimalId;
-                animalToReturn.Name = animalToGet.Name;
-                animalToReturn.Weight = animalToGet.Weight;
-                animalToReturn.Age = animalToGet.Age;
-                animalToReturn.Demeanor = animalToGet.Demeanor;
-                animalToReturn.KidFriendly = animalToGet.KidFriendly;
-                animalToReturn.PetFriendly = animalToGet.PetFriendly;
-                animalToReturn.Gender = animalToGet.Gender;
-                animalToReturn.AdoptionStatus = animalToGet.AdoptionStatus;
-                animalToReturn.CategoryId = animalToGet.CategoryId;
-                animalToReturn.DietPlanId = animalToGet.DietPlanId;
-                animalToReturn.EmployeeId = animalToGet.EmployeeId;
+                animalToReturn.AnimalId = animals.AnimalId;
+                animalToReturn.Name = animals.Name;
+                animalToReturn.Weight = animals.Weight;
+                animalToReturn.Age = animals.Age;
+                animalToReturn.Demeanor = animals.Demeanor;
+                animalToReturn.KidFriendly = animals.KidFriendly;
+                animalToReturn.PetFriendly = animals.PetFriendly;
+                animalToReturn.Gender = animals.Gender;
+                animalToReturn.AdoptionStatus = animals.AdoptionStatus;
+                animalToReturn.CategoryId = animals.CategoryId;
+                animalToReturn.DietPlanId = animals.DietPlanId;
+                animalToReturn.EmployeeId = animals.EmployeeId;
                 // Insert any additional changes to column values.
             }
+
             return animalToReturn;
         }
 
